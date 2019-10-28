@@ -7,8 +7,7 @@ async function connect(url){ //Al hacer esta funcion asincrona nos aseguramos de
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
-console.log('[db] Conectada con éxito');
-
+    console.log('[db] Conectada con éxito');
 }
 
 module.exports = connect;

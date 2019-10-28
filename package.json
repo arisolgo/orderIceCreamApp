@@ -1,0 +1,14 @@
+{
+  "name": "order-ice_cream-app",
+  "version": "0.0.1",
+  "description": "Ice Cream Ordering App",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ariel Solano",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

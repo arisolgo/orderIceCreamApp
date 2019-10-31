@@ -9,11 +9,11 @@ const checkToken = (req, res, next)=>{
         response.error(req, res, 'Authorization token must be provided', 401);
         return;
     }
-    jwt.verify(token, config.secret, (success, err) => {
+    jwt.verify( token, config.secret, (success, err) => {
         if (err) {
-            response.error(req, res, '', 401, err);
+            response.error(req, res, 'Authorization token is not valid', 401, err);
         } else {
-            // response.success(req, res, 200, success);
+            req.success = success;
             next();
         }
     });

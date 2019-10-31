@@ -5,6 +5,7 @@ const router = express.Router();
 
 
 router.post('/login', function(req,res){
+    console.log('login', req.body);
     console.log(req.body.email, req.body.password)
     controller.login(req.body.email, req.body.password).then((data)=>{
         response.success(req, res, data, 200);

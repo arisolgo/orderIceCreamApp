@@ -3,7 +3,7 @@ const response =  require('../../network/response'); //Llamamos al modulo de Res
 const controller = require('./controller') //accediendo a todas las funciones de controller
 const router = express.Router();
 
-router.post('/', function(req, res){
+router.post('/register', function(req, res){
     controller.addUser(req.body.name, req.body.email, req.body.password).then((data)=>{
         response.success(req,res,data,201);
     })

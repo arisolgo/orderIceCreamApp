@@ -6,12 +6,21 @@ function saveOrdersPack(ordersPack){
 }
 
 async function findOrdersPack(filterPack){
-    let filter = {};
-    if(filterPack!=null){
-        filter ={_id: filterPack}
-    }
-    const ordersPack = await model.find(filter);
-    return ordersPack;
+    return new Promise((resolve, reject)=>{
+        let filter = {};
+        if(filterPack!=null){
+            filter ={_id: filterPack}
+        }
+         model.find(filter).populate('userCreator').exec((error, populated)=>{
+            if(error){
+                reject(error);
+                return false;
+            }
+            resolve(populated)
+        })
+
+    })
+   
 }
 
 function deleteOrdersPack(id){

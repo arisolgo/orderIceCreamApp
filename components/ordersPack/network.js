@@ -15,9 +15,9 @@ router.post('/', function(req, res){
 
 
 router.get('/', function(req, res){ 
-    const filterOrders = req.query.order || null; 
+    const filterOrdersPack = req.query.order || null; 
     
-    controller.findOrder(filterOrders).then((orderList) =>{
+    controller.list(filterOrdersPack).then((orderList) =>{
         response.success(req, res, orderList, 200);
     })
     .catch(e =>{
@@ -26,5 +26,15 @@ router.get('/', function(req, res){
 
  
 });
+
+router.delete('/:id', function(req, res){
+    controller.delete(req.params.id).then(()=>{
+        response.success(req, res, `Lista de orden ${req.params.id} eliminada`, 200);
+    }).
+    catch(e=>{
+        response.error(req, res, 'Error Interno', 500, e);
+    })
+})
+
 
 module.exports = router;

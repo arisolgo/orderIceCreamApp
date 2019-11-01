@@ -21,7 +21,24 @@ function getUser(filterUser) {
     });
 }
 
+function deleteUser(id){
+    return new Promise((resolve, reject) =>{
+        if(!id){
+            reject('Id invalido')
+            return false;
+        }
+        store.delete(id).
+        then(()=>{
+            resolve();
+        }).
+        catch(e=>{
+            reject(e)
+        })
+    })
+}
+
 module.exports={
     addUser,
-    getUser
+    getUser,
+    deleteUser
 }

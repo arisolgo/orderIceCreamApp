@@ -13,7 +13,7 @@ router.post('/register', function(req, res){
 })
 
 router.get('/', function(req, res){
-    const filterUser = req.query.name || null;
+    const filterUser = req.query.id || null;
 
     controller.getUser(filterUser)
         .then(data => {
@@ -23,5 +23,15 @@ router.get('/', function(req, res){
             response.error(req, resp, 'Internal Error', 500, error);
         })
 });
+
+router.delete('/:id', function(req, res){
+    controller.deleteUser(req.params.id).then(()=>{
+        response.success(req, res, `Usuario ${req.params.id} eliminado`, 200);
+    }).
+    catch(e=>{
+        response.error(req, res, 'Error Interno', 500, e);
+    })
+})
+
 
 module.exports = router;

@@ -6,8 +6,14 @@ const mySchema = new Schema({
    name: String, //nombre del usuario
    email: String, //correo electronico
    password: String, //contraseña
-   order: [], //orden/ordenes del usuario
-   ordersPack:[] //listado de ordenes de los usuarios
+   order: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref:"Order"
+   }], //orden/ordenes del usuario
+   ordersPack:[{
+      type: mongoose.Schema.Types.ObjectId,
+      ref:"OrdersPack"
+   }] //listado de ordenes de los usuarios
 });
 
 

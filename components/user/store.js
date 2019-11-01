@@ -6,18 +6,35 @@ function addUser(user){
 }
 
 async function getUser(filterUser) {
-    let filter = {};
+    return new Promise((resolve, reject)=>{
+        let filter = {};
 
-    if (filterUser) {
-        filter['name'] = filterUser;
-    }
-
-    const users = await Model.find(filter);
-    return users;
+        if (filterUser) {
+            filter['_id'] = filterUser;
+        }
+    
+        Model.find(filter).populate('order').populate('ordersPack').exec((error, populated)=>{
+            if(error){
+                reject(error);
+                return false;
+            }
+            resolve(populated)
+        })
+    })
+   
 }
+
+function deleteUser(id){
+    return model.deleteOne({
+        _id:id
+    });
+}
+
+
 
 
 module.exports = {
     add:addUser,
-    list:getUser
+    list:getUser,
+    delete:deleteUser
 }

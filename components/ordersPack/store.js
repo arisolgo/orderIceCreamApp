@@ -11,7 +11,7 @@ async function findOrdersPack(filterPack){
         if(filterPack!=null){
             filter ={_id: filterPack}
         }
-         model.find(filter).populate('userCreator').exec((error, populated)=>{
+         model.find(filter).populate({path:'userCreator', select: 'name'}).populate('orders').exec((error, populated)=>{
             if(error){
                 reject(error);
                 return false;

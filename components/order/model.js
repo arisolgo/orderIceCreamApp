@@ -3,8 +3,15 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const mySchema = new Schema({
-    description:String,
-    price:Number,
+
+    ordersPack:{
+        type: Schema.ObjectId,
+        ref: "OrdersPack",
+
+    },
+
+    description:{},
+   // price:Number,
 
     userId: {
         type: Schema.ObjectId,
@@ -21,7 +28,7 @@ const mySchema = new Schema({
 //             2:{name:"creditCard"}
 //        }
 //    },
-   payed:false
+  // payed:false
 
 
 });

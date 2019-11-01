@@ -15,7 +15,7 @@ router.post('/', function(req, res){
 
 
 router.get('/', function(req, res){ 
-    const filterOrdersPack = req.query.order || null; 
+    const filterOrdersPack = req.query.ordersPack || null; 
     
     controller.list(filterOrdersPack).then((orderList) =>{
         response.success(req, res, orderList, 200);

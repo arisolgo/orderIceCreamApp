@@ -17,27 +17,25 @@ router.get('/', function(req, res){ //en este caso solo me enviara el response c
  
 });
 
-// router.get('/:id', function(req, res){ //en este caso solo me enviara el response con get
-//   //  const filterOrders = req.query.order || null;
-    
-//     controller.findOrderById(req.params.id).then((orderList) =>{
-//         response.success(req, res, orderList, 200);
-//     })
-//     .catch(e =>{
-//         response.error(req, res, 'Unexpected Error', 500, e);
-//     })
-
- 
-// });
 
 router.post('/', function(req, res){ //en este caso solo me enviara el response con post
-
-    controller.saveOrder(req.body.description, req.body.user, req.body.paymentMethod).then((result)=>{
+    console.log(req.body.ordersPackId, req.body.productName, req.body.flavor, req.body.size, req.body.user, req.body.paymentMethod);
+    controller.saveOrder(req.body.ordersPackId, req.body.productName, req.body.flavor, req.body.size, req.body.user, req.body.paymentMethod).then((result)=>{
         response.success(req, res, result, 201);
     })
     .catch(e=>{
         response.error(req, res, 'Informacion Invalida', 400, 'Error en el controlador');
     });
+});
+
+router.patch('/:id', function (req, res) {
+    controller.updateOrder(req.params.id, req.body.productName, req.body.flavor, req.body.size)
+        .then((data) => {
+            response.success(req, res, data, 200);
+        })
+        .catch(e => {
+            response.error(req, res, 'Informacion Invalida', 500, e);
+        });
 });
 
 router.delete('/:id', function(req, res){

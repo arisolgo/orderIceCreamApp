@@ -1,8 +1,8 @@
 const Model = require('./model');
 
-function saveOrder(order){
-      const userOrder = new Model(order);
-      userOrder.save();
+function saveOrder(order){    
+          const userOrder = new Model(order);
+          userOrder.save();
 }
 
 async function findOrder(filterOrder){
@@ -33,11 +33,23 @@ function removeOrder(id){
     });
 }
 
+async function updateOrder(id, orderDescription) {
+    const foundOrder = await Model.findOne({
+        _id: id
+    });
+ 
+    foundOrder.description = orderDescription;
+
+    const newOrder = await foundOrder.save();
+    return newOrder;
+}
+
+
 
   
 module.exports = {
     save:saveOrder,
     find:findOrder,
-    // findById:findOrderById,
+    update:updateOrder,
     delete:removeOrder
 }

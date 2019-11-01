@@ -1,15 +1,21 @@
 const store  = require('./store');
 
-function saveOrder(orderDescription, user, paymentMethod){
+function saveOrder(ordersPackId,productName, size, flavor, user, paymentMethod){
     return new Promise((resolve, reject)=>{
-        if(!user || !orderDescription ){
+        if(!user || !ordersPackId || !productName || !size || !flavor || !paymentMethod){
             reject('Datos incorrectos'); 
             return false;       
         }
 
+        const productDescription = {
+            productName:productName,
+            size:size,
+            flavor:flavor
+        }
         
         const fullOrder ={
-            description:orderDescription,
+            ordersPack:ordersPackId,
+            description:productDescription,
             userId:user,
             paymentMethod:paymentMethod,
         }
@@ -47,8 +53,29 @@ function deleteOrder(id){
     })
 }
 
+function updateOrder(id, productName, flavor, size) {
+    return new Promise(async (resolve, reject) => {
+
+        if (!id || !productName || !size || !flavor) {
+            reject('Invalid data');
+            return false;
+        }
+        const description = {
+            productName:productName,
+            flavor:flavor,
+            size:size
+        }
+
+        const result = await store.update(id, description);
+
+        resolve(result);
+    })
+}
+
+
 module.exports={
     saveOrder,
     findOrder,
+    updateOrder,
     deleteOrder
 }

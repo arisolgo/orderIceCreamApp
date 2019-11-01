@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+
 const Schema = mongoose.Schema;
 
 const mySchema = new Schema({
@@ -11,7 +12,7 @@ const mySchema = new Schema({
     } ,
 
     orders:[{
-        type:Schema.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref:"Order"
     }],
 
